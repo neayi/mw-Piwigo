@@ -40,7 +40,7 @@
 		]
 	},
 	"ExtensionMessagesFiles": {
-		"ExampleMagic": "Piwigo.i18n.magic.php"
+		"PiwigoMagic": "Piwigo.i18n.magic.php"
 	},
 	"ResourceModules": {
 		"ext.piwigo": {
