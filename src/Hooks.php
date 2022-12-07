@@ -122,9 +122,6 @@ class Hooks implements
 			}
 		}
 
-		$parser->getOutput()->addModules( 'ext.piwigo' );
-		$parser->getOutput()->addModules( 'ext.baguetteBox' );
-
 		if (empty($GLOBALS['wgPiwigoURL']))
 		{
 			return '<p>Please add <code>$wgPiwigoURL</code> to your LocalSettings.php</p>';
