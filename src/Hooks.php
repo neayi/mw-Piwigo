@@ -58,8 +58,7 @@ class Hooks implements
 	 * @return string to replace tag with
 	 */
 	public static function parserKeywordPiwigo( $input, array $args, Parser $parser, PPFrame $frame ) {
-		$parser->getOutput()->addModules( 'ext.piwigo' );
-		$parser->getOutput()->addModules( 'ext.baguetteBox' );
+		$parser->getOutput()->addModules( ['ext.piwigo', 'ext.baguetteBox'] );
 
 		if (empty($GLOBALS['wgPiwigoURL']))
 		{
@@ -87,8 +86,7 @@ class Hooks implements
 	 */
 	public static function parserFunctionPiwigo( Parser $parser, string $value, ...$args ) {
 
-		$parser->getOutput()->addModules( 'ext.piwigo' );
-		$parser->getOutput()->addModules( 'ext.baguetteBox' );
+		$parser->getOutput()->addModules( ['ext.piwigo', 'ext.baguetteBox'] );
 
 		$args[] = $value;
 
