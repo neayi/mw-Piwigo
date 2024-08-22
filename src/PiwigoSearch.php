@@ -98,7 +98,7 @@ class PiwigoSearch extends ApiBase {
 		$cacheKey = $cache->makeKey( 'piwigo-ext', $piwigoWSURL );
 		$images = $cache->get( $cacheKey );
 
-		if (!empty($images))
+		if (!empty($images) && is_array($images))
 			return $images;
 
 		$ch = curl_init($piwigoWSURL);
