@@ -152,7 +152,8 @@ class PiwigoSearch extends ApiBase {
 
 		curl_close($ch);
 
-   		$cache->set( $cacheKey, $images, 200000 );
+   		if ( !empty($images) )
+			$cache->set( $cacheKey, $images, 200000 );
 
 		return $images;
 	}
