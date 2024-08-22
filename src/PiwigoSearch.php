@@ -69,7 +69,7 @@ class PiwigoSearch extends ApiBase {
 		}
 		else if (!empty($category))
 		{
-			$piwigoWSURL = $piwigoWSURL . "&method=pwg.categories.getImages&cat_id=" . $category;
+			$piwigoWSURL = $piwigoWSURL . "&method=pwg.categories.getImages&recursive=true&cat_id=" . $category;
 		}
 
 		if ($count > 0)
