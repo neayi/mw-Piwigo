@@ -69,7 +69,7 @@ class Hooks implements
 		$piwigoParams[ 'wgPiwigoURL' ] = $GLOBALS['wgPiwigoURL'];
         $piwigoParams[ 'wgPiwigoGalleryLayout' ] = $GLOBALS['wgPiwigoGalleryLayout'] ?? 'fluid';
 
-		$parser->getOutput()->setJsConfigVar( "Piwigo", $piwigoParams );
+		$parser->getOutput()->setJsConfigVar( 'Piwigo', $piwigoParams );
 
 		$ret = self::getGalleryTag($args);
 
@@ -129,7 +129,7 @@ class Hooks implements
 		$piwigoParams[ 'wgPiwigoURL' ] = $GLOBALS['wgPiwigoURL'];
 		$piwigoParams[ 'wgPiwigoGalleryLayout' ] = $GLOBALS['wgPiwigoGalleryLayout'] ?? 'fluid';
 
-		$parser->getOutput()->setJsConfigVar( "Piwigo", $piwigoParams );
+		$parser->getOutput()->setJsConfigVar( 'Piwigo', $piwigoParams );
 
 		$ret = self::getGalleryTag($parameters);
 
