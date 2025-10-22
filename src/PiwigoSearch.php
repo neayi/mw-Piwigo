@@ -111,6 +111,12 @@ class PiwigoSearch extends ApiBase {
 		// The maximum number of seconds to allow cURL functions to execute.
 		curl_setopt($ch, CURLOPT_TIMEOUT, 4);
 
+		// If the URL contains tripleperformance, then use http and not https:
+		if (strpos($piwigoWSURL, 'photos.tripleperformance') !== false)
+		{
+			$piwigoWSURL = str_replace('https://', 'http://', $piwigoWSURL);
+		}
+
         if ($GLOBALS['env'] == 'dev')
         {
 			// Ignore self signed https
