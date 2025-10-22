@@ -30,7 +30,7 @@
             if (site !== undefined)
                 piwigoRootURL = site;
             else
-                piwigoRootURL = mw.config.get('Piwigo').wgPiwigoURL;
+                piwigoRootURL = mw.config.get('wgPiwigoURL');
 
             var piwigoURL = piwigoRootURL + '/?/';
 

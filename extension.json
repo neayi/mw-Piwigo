@@ -8,7 +8,7 @@
 	"license-name": "MIT License",
 	"type": "other",
 	"requires": {
-		"MediaWiki": ">= 1.35.0"
+		"MediaWiki": ">= 1.39.0"
 	},
 	"AutoloadNamespaces": {
 		"MediaWiki\\Extension\\Piwigo\\": "src/"

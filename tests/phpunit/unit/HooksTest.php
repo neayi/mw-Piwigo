@@ -3,6 +3,7 @@
 namespace MediaWiki\Extension\Piwigo\Tests;
 
 use MediaWiki\Extension\Piwigo\Hooks;
+use MediaWiki\Parser\Parser;
 
 /**
  * @coversDefaultClass \MediaWiki\Extension\Piwigo\Hooks
@@ -10,52 +11,24 @@ use MediaWiki\Extension\Piwigo\Hooks;
 class HooksTest extends \MediaWikiUnitTestCase {
 
 	/**
-	 * @covers ::onBeforePageDisplay
+	 * @covers ::onParserFirstCallInit
 	 */
-	public function testOnBeforePageDisplayVandalizeIsTrue() {
-		$config = new \HashConfig( [
-			'PiwigoVandalizeEachPage' => true
-		] );
-		$outputPageMock = $this->getMockBuilder( \OutputPage::class )
-			->disableOriginalConstructor()
-			->getMock();
-		$outputPageMock->method( 'getConfig' )
-			->willReturn( $config );
-
-		$outputPageMock->expects( $this->once() )
-			->method( 'addHTML' )
-			->with( '<p>Piwigo was here</p>' );
-		$outputPageMock->expects( $this->once() )
-			->method( 'addModules' )
-			->with( 'oojs-ui-core' );
-
-		$skinMock = $this->getMockBuilder( \Skin::class )
+	public function testOnParserFirstCallInit() {
+		$parserMock = $this->getMockBuilder( Parser::class )
 			->disableOriginalConstructor()
 			->getMock();
 
-		( new Hooks )->onBeforePageDisplay( $outputPageMock, $skinMock );
+		$parserMock->expects( $this->once() )
+			->method( 'setHook' )
+			->with( 'piwigo', [ Hooks::class, 'parserKeywordPiwigo' ] );
+
+		$parserMock->expects( $this->once() )
+			->method( 'setFunctionHook' )
+			->with( 'piwigo', [ Hooks::class, 'parserFunctionPiwigo' ] );
+
+		$hooks = new Hooks();
+		$result = $hooks->onParserFirstCallInit( $parserMock );
+
+		$this->assertTrue( $result );
 	}
-
-	/**
-	 * @covers ::onBeforePageDisplay
-	 */
-	public function testOnBeforePageDisplayVandalizeFalse() {
-		$config = new \HashConfig( [
-			'PiwigoVandalizeEachPage' => false
-		] );
-		$outputPageMock = $this->getMockBuilder( \OutputPage::class )
-			->disableOriginalConstructor()
-			->getMock();
-		$outputPageMock->method( 'getConfig' )
-			->willReturn( $config );
-		$outputPageMock->expects( $this->never() )
-			->method( 'addHTML' );
-		$outputPageMock->expects( $this->never() )
-			->method( 'addModules' );
-		$skinMock = $this->getMockBuilder( \Skin::class )
-			->disableOriginalConstructor()
-			->getMock();
-		( new Hooks )->onBeforePageDisplay( $outputPageMock, $skinMock );
-	}
-
 }

@@ -19,12 +19,11 @@
 
 namespace MediaWiki\Extension\Piwigo;
 
-use FormatJson;
-use Parser;
+use MediaWiki\Hook\ParserFirstCallInitHook;
+use MediaWiki\Parser\Parser;
 use PPFrame;
 
-class Hooks implements
-	\MediaWiki\Hook\ParserFirstCallInitHook
+class Hooks implements ParserFirstCallInitHook
 {
 	/**
 	 * Register parser hooks to add the piwigo keyword
@@ -65,11 +64,8 @@ class Hooks implements
 			return '<p>Please add <code>$wgPiwigoURL</code> to your LocalSettings.php</p>';
 		}
 
-		$piwigoParams = [];
-		$piwigoParams[ 'wgPiwigoURL' ] = $GLOBALS['wgPiwigoURL'];
-        $piwigoParams[ 'wgPiwigoGalleryLayout' ] = $GLOBALS['wgPiwigoGalleryLayout'] ?? 'fluid';
-
-		$parser->getOutput()->setJsConfigVar( 'Piwigo', $piwigoParams );
+		$parser->getOutput()->setJsConfigVar( 'wgPiwigoURL', $GLOBALS['wgPiwigoURL'] );
+		$parser->getOutput()->setJsConfigVar( 'wgPiwigoGalleryLayout', $GLOBALS['wgPiwigoGalleryLayout'] ?? 'fluid' );
 
 		$ret = self::getGalleryTag($args);
 
@@ -125,11 +121,8 @@ class Hooks implements
 			return '<p>Please add <code>$wgPiwigoURL</code> to your LocalSettings.php</p>';
 		}
 
-		$piwigoParams = [];
-		$piwigoParams[ 'wgPiwigoURL' ] = $GLOBALS['wgPiwigoURL'];
-		$piwigoParams[ 'wgPiwigoGalleryLayout' ] = $GLOBALS['wgPiwigoGalleryLayout'] ?? 'fluid';
-
-		$parser->getOutput()->setJsConfigVar( 'Piwigo', $piwigoParams );
+		$parser->getOutput()->setJsConfigVar( 'wgPiwigoURL', $GLOBALS['wgPiwigoURL'] );
+		$parser->getOutput()->setJsConfigVar( 'wgPiwigoGalleryLayout', $GLOBALS['wgPiwigoGalleryLayout'] ?? 'fluid' );
 
 		$ret = self::getGalleryTag($parameters);
 
